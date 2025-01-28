@@ -78,7 +78,8 @@ void draw_scene(Context &ctx)
     // Define per-scene uniforms
     glUniform1f(glGetUniformLocation(ctx.program, "u_time"), ctx.elapsedTime);
     // ...
-
+    glm::mat4 view = glm::mat4(ctx.trackball.orient);
+    glUniformMatrix4fv(glGetUniformLocation(ctx.program, "u_view"),1, GL_FALSE, &view[0][0]);
     // Draw scene
     for (unsigned i = 0; i < ctx.asset.nodes.size(); ++i) {
         const gltf::Node &node = ctx.asset.nodes[i];
